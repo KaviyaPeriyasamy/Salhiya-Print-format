@@ -1,0 +1,23 @@
+<style>
+	@media screen {
+		.print-format {
+			width: 264.16mm;
+		}
+	}
+</style>
+<div class="page-break">
+<div id="footer-html">
+{% for n in range(0, doc.no_of_labels_required) %}
+  <div class="row" style="height:1.5in; width:5in">
+    <div class="col-sm-5" style="padding-top:2px;display: inline-block">
+    <div style="float:left;"><img src="{{ doc.custom_qr_code }}" style="height:0.8in; "></div>
+    <div style="float:right; padding-left:1px"><strong>{{doc.name}}<br>{{frappe.db.get_single_value('Global Defaults', 'default_currency')}}.{{ frappe.db.get_value('Item Price', {'item_code':doc.name}, 'price_list_rate') }}</strong></div>
+    </div>
+    <div class="col-sm-4" style="padding-top:2px ">
+      <strong>
+    G - {{doc.gold_weight}} D - {{doc.diamond_weight}} <br> {{doc.diamond_quality}} - {{doc.diamond_color}}</strong>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</div>
